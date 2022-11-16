@@ -1,4 +1,5 @@
 ﻿using Cofrinho;
+using System;
 
 public class Euro : Moeda
 

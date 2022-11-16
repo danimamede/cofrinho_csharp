@@ -16,27 +16,15 @@ namespace Cofrinho
             moedasCofrinho.Add(moeda);
         }
 
-        public void RemoverMoeda(Moeda moedaRemover)
+        public bool RemoverMoeda(Moeda moedaRemover)
         {
-            bool encontrado = false;
-            for (int m = 0; m < moedasCofrinho.Count(); m++)
-            {
-                Moeda moeda = moedasCofrinho[m];
-                if (moedaRemover.valor == moeda.valor && moedaRemover.info() == moeda.info())
-                {
-                    moedasCofrinho.Remove(moeda);
-                    encontrado = true;
-                }
-            }
+            Moeda moeda = moedasCofrinho.Find(x => x.info() == moedaRemover.info() && x.valor == moedaRemover.valor);
+            bool encontrado = (moeda != null) ? true : false;
             if (encontrado == true)
             {
-                Console.WriteLine("Moeda removida com sucesso.");
+                moedasCofrinho.Remove(moeda);
             }
-            else
-            {
-                Console.WriteLine("Valor de moeda não encontrada. Tente novamente.");
-            }
-
+            return encontrado;
         }
 
         public void ListarMoedas()
@@ -54,7 +42,7 @@ namespace Cofrinho
             for (int m = 0; m < moedasCofrinho.Count(); m++)
             {
                 Moeda moeda = moedasCofrinho[m];
-                soma = soma + moeda.converter();
+                soma += moeda.converter();
             }
 
             return soma;

@@ -1,8 +1,10 @@
 ﻿using Cofrinho;
+using System;
 
 internal class Program
 {
-    private static void Main(string[] args)
+
+    public static void Main(string[] args)
     {
         Console.WriteLine("COFRINHO DA DANI");
         Console.WriteLine("Por favor digite a opção desejada:");
@@ -12,8 +14,11 @@ internal class Program
 
         do
         {
+            Console.Clear();
             Console.WriteLine("\n1. Adicionar moeda\n2. Remover moeda\n3. Listar moedas no cofrinho\n4. Consultar valor total em reais\n5. Encerrar");
-            selectMenu = int.Parse(Console.ReadLine());
+
+            int.TryParse(Console.ReadLine(), out selectMenu);
+                                  
 
             switch (selectMenu)
             {
@@ -22,7 +27,7 @@ internal class Program
                     Console.WriteLine("Moeda adicionada com sucesso");
                     break;
                 case 2:
-                    cofrinho.RemoverMoeda(SelectMoeda());
+                    RemoverMoeda();
                     break;
                 case 3:
                     Console.WriteLine("\nMoedas no cofrinho:");
@@ -40,10 +45,25 @@ internal class Program
                     break;
             }
 
+            Console.ReadKey();
         } while (selectMenu != 5);
 
 
-        static Moeda SelectMoeda()
+
+        void RemoverMoeda()
+        {
+            if (cofrinho.RemoverMoeda(SelectMoeda()))
+            {
+                Console.WriteLine("Moeda removida com sucesso.");
+            }
+            else
+            {
+                Console.WriteLine("Valor de moeda não encontrada. Tente novamente.");
+            }
+
+            Console.ReadKey();
+        }
+        Moeda SelectMoeda()
         {
             Moeda moeda = null;
             int selectMoeda = 0;
@@ -88,6 +108,5 @@ internal class Program
             }
 
         }
-
     }
 }

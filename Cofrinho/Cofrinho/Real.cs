@@ -1,4 +1,6 @@
-﻿namespace Cofrinho
+﻿using System;
+
+namespace Cofrinho
 {
     public class Real : Moeda
 
