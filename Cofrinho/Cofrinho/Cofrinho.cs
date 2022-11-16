@@ -6,18 +6,60 @@ using System.Threading.Tasks;
 
 namespace Cofrinho
 {
-    internal class Cofrinho
+    public class Cofre
     {
 
-        ArrayList<Moeda> moedas = new();
+        List<Moeda> moedasCofrinho = new List<Moeda>();
 
-        // adicionar moedas
+        public void AdicionarMoeda(Moeda moeda)
+        {
+            moedasCofrinho.Add(moeda);
+        }
 
-        // remover moedas
+        public void RemoverMoeda(Moeda moedaRemover)
+        {
+            bool encontrado = false;
+            for (int m = 0; m < moedasCofrinho.Count(); m++)
+            {
+                Moeda moeda = moedasCofrinho[m];
+                if (moedaRemover.valor == moeda.valor && moedaRemover.info() == moeda.info())
+                {
+                    moedasCofrinho.Remove(moeda);
+                    encontrado = true;
+                }
+            }
+            if (encontrado == true)
+            {
+                Console.WriteLine("Moeda removida com sucesso.");
+            }
+            else
+            {
+                Console.WriteLine("Valor de moeda não encontrada. Tente novamente.");
+            }
 
-        // listar moedas
+        }
 
-        // consultar valor total convertido em reais
+        public void ListarMoedas()
+        {
+            for (int m = 0; m < moedasCofrinho.Count(); m++)
+            {
+                Moeda moeda = moedasCofrinho[m];
+                Console.WriteLine(moeda.info() + " = " + moeda.valor);
+            }
+        }
+
+        public double TotalConvertido()
+        {
+            double soma = 0;
+            for (int m = 0; m < moedasCofrinho.Count(); m++)
+            {
+                Moeda moeda = moedasCofrinho[m];
+                soma = soma + moeda.converter();
+            }
+
+            return soma;
+        }
 
     }
+
 }
